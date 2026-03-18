@@ -6,7 +6,7 @@ import products from "../data/products";
 
 function ProductDetail() {
     const {id} = useParams(); //get:id from the URL 
-    const location = useLocations(); //read state passed by ProductCard
+    const location = useLocation(); //read state passed by ProductCard
     const navigate = useNavigate();
     const dispatch = useDispatch();
 
