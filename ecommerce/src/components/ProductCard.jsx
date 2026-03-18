@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom';
-import { useDispatch,useDispatch } from 'react-redux';
+import { useDispatch} from 'react-redux';
 import { ShoppingBag } from 'lucide-react';
 import { addItem } from '../store/cartSlice';
 
