@@ -1,4 +1,4 @@
-import {NavLink} from "react-redux";
+import {NavLink} from "react-router-dom";
 import {Home, AlignJustify, Grid2X2, ShoppingBag, Camera} from "lucide-react";
 
 //Each sidebar item: which Lucide icon what label, and where it links 
