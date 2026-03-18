@@ -1,6 +1,6 @@
 import { useDispatch } from "react-redux";
 import { Star } from "lucide-react";
-import { increaseQuantity, decreaseQuantity, removeItem } from '../store/cartSlice';
+import { increaseQty, decreaseQty, removeItem } from '../store/cartSlice';
 import { defaults } from "autoprefixer";
 
 //item - a cart item (product fileds + quantity)
@@ -15,69 +15,71 @@ function CartItem({ item, showControls = true }) {
             <Star 
             key={i}
             size={14}
-            //Fill star if index is less than rating, else outline
-            className={i<Math.floor(rating)
-                ? 'fill-star text-star'
-                : 'text-gray-300'}
+            fill={i < Math.floor(rating) ? '#F59E0B' : 'none'}
+            color={i < Math.floor(rating) ? '#F59E0B' : '#D1D5DB'}
                 />
             ));
-        };
-
+        }
  return (
-    <div className='bg-white rounded-card p-4 flex gap-4'>
-
+    <div style={{ backgroundColor: 'white', borderRadius: '16px', padding: '16px', display: 'flex', gap: '16px', boxShadow: '0 1px 3px rgba(0,0,0,0.08)' }}>
         {/*PRODUCT IMAGE*/}
-        <div className='w-24 h-24 shrink-0 bg-gray-50 rounded-xl flex items-center justify-center'>
+        <div style={{ width: '96px', height: '96px', flexShrink: 0, backgroundColor: '#F9FAFB', borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
             <img
             src={item.image}
             alt={item.name}
-            className='w-full h-full object-contain'
+           style={{ width: '100%', height: '100%', objectFit: 'contain' }}
+          onError={(e) => { e.target.src = 'https://placehold.co/100x100?text=?'; }}
             />
             </div>
 
             {/*PRODUCT INFORMATION*/}
-            <div className='flex-1 min-w-0'>
-                <p className='font-semibold text-gray-900'>{item.name}</p>
-                <p className='text-subtle text-sm'>{item.variant}</p>
-                <p className='text-subtle text-xs mt-1 line-clamp-2'>{item.description}</p>
+            <div style={{flex: 1, minWidth:0}}>
+                <p style={{ fontWeight: '600', color: '#111827', margin: 0 }}>{item.name}</p>
+                <p style={{ color: '#6B7280', fontSize: '13px', margin: '2px 0' }}>{item.variant}</p>
+                <p style={{ color: '#6B7280', fontSize: '12px', margin: '4px 0', overflow: 'hidden', display: '-webkit-box', WebkitLineClamp: 2, WebkitBoxOrient: 'vertical' }}>
+          {item.description}
+        </p>
 
             {/*Stars + numeric rating */}
-            <div className='flex items-center gap-1 mt-2'>
+            <div style={{display:'flex', alignItems:'center', gap:'2px', margin:'6px 0'}}>
                 {renderStars(item.rating)}
-                <span className='text-xs text-subtle ml-1'>{item.rating} / 5</span>
+                <span style={{fontSize: '12px' , color: '#6B7280', marginLeft:'4px'}}>{item.rating} / 5</span>
                 </div>
             
             {/*Price + quantity + controls */}
-            <div className='flex items-center justify-between mt-3'>
-                <span className='font-semibold text-sm text-gray-900'>
-                    $ {item.price.toFixed(2)} x {item.quanity}
+            <div style={{display:'flex', alignItems:'center', justifyContent:'space-between', marginTop: '8px'}}>
+                <span style={{ fontWeight: '600', fontSize:'14px', color: '#111827'}}>
+                    $ {item.price.toFixed(2)} x {item.qty}
                 </span>
             
             {/* Quantity controls - only shown when showControls is true */}
             {showControls && (
-                <div className='flex items-center gap-3'>
+                <div style={{display: 'flex', alignItems: 'center', gap: '10px'}}>
                     {/*Decrease quantity or remove if quantity is 1 */}
                     <button
-                    onClick={() => dispatch(decreaseQuantity(item.id)) }
-                    className='w-7 h-7 rounded-full border border-gray-300 flex items-center justify-center text-gray-600 hover:bg-gray-100 font-bold text-lg'
-                    aria-label='Decrease quantity'
+                    onClick={() => dispatch(decreaseQty(item.id)) }
+                    style={{ width: '28px', height: '28px', borderRadius: '50%', border:'1px solid #D1D5DB', background: 'white', cursor: 'pointer', fontWeight:'bold', fontSize:'16px', display:'flex', alignItems: 'center', justifyContent:'center'}}
                     >
                       -  
                     </button>
-                    <span className='font-semibold w-4 text-center'>{item.quantity}</span>
+                    <span style={{fontWeight: '600', minWidth:'16px', textAlign:'center'}}>{item.qty}</span>
                     <button 
-                    onClick={() => dispatch(increaseQuantity(item.id))}
-                    className='w-7 h-7 rounded-full border border-gray-300 hover:bg-gray-100 font-bold text-lg'
-                    aria-label='Increase quantity'
+                    onClick={() => dispatch(increaseQty(item.id))}
+                     style={{ width: '28px', height: '28px', borderRadius: '50%', border:'1px solid #D1D5DB', background: 'white', cursor: 'pointer', fontWeight:'bold', fontSize:'16px', display:'flex', alignItems: 'center', justifyContent:'center'}}
                     >
                         +
                     </button>
-                </div>
-            )}
-
+                          <button
+                onClick={() => dispatch(removeItem(item.id))}
+                style={{ marginLeft: '8px', background: 'none', border: 'none', cursor: 'pointer', color: '#EF4444' }}
+              >
+                <Trash2 size={16} />
+              </button>
+            </div>
+          )}
             {/*Read-only quantity shown in Checkout review */}
             {!showControls && (
-                <span className='text-sm text-subtle'> Quantity: {item.quanity}</span>
+                <span style={{fontSize: '13px', color: '#6B7280'}}>Qty: {item.qty}</span>
             )}
             </div>
         </div>
