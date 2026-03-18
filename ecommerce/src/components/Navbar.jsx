@@ -3,7 +3,7 @@ import {Link, useNavigate} from 'react-router-dom';
 import { useSelector } from 'react-redux';
 //Lucide React icons (these match the Figma icon style exactly)
 import {ShoppingCart, Search, Menu, X} from 'lucide-react';
-import { selectCartTotalQuantity } from '../store/cartSlice';
+import { selectCartTotalQty } from '../store/cartSlice';
 
 //Navbar receives two props:
 //onMenuClick (called when the hamburger is clicked) (toggles sidebar)
@@ -13,7 +13,7 @@ function Navbar ({ onMenuClick, sidebarOpen}) {
     const [searchQuery, setSearchQuery] = useState ('');
 
 //Get total cart quantity fromRedux for the badge 
-const cartQuantity = useSelector (selectCartTotalQuantity);
+const cartQuantity = useSelector (selectCartTotalQty);
 
 //Handle search: when the user presses Enter, go to Home 
 //with a query param so Home cabn filter products 
@@ -26,40 +26,41 @@ const handleSearch = (e) => {
 return (
     //sticky top-0 keeps navbar visible when scrolling
     //z-50 puts it above the sidebar overlay
-    <nav className='sticky top-0 z-50 bg-app-bg border-b border-gray-200'>
-        <div className='max-w-screen-xl mx-auto px-4 py-3 flex items-center gap-4'>
+    <nav style={{ position: 'sticky', top: 0, zIndex: 50, backgroundColor: '#EDEDED', borderBottom: '1px solid #E5E7EB' }}>
+        <div style={{ maxWidth: '1280px', margin: '0 auto', padding: '12px 16px', display: 'flex', alignItems: 'center', gap: '16px' }}>
     
     {/* HAMBURGER BUTTON (visible on all screens)*/}
-    <button onClick={onMenuClick} className='p-2 rounded-lg hover:bg-gray-200 transition-colors'
-    arial-label='Toggle menu'
+    <button onClick={onMenuClick} 
+     style={{ padding: '8px', borderRadius: '8px', border: 'none', background: 'none', cursor: 'pointer' }}
+          aria-label='Toggle menu'
     >
     {/*Show X when sidebar is open, hamburger Menu icon when closed*/}
     {sidebarOpen
-    ? <X size={24} className='text-gray-700'/>
-    :<Menu size={24} className='text-gray-700'/>}
+    ? <X size={24} color='#374151' />
+    :<Menu size={24} color='#374151' />}
     </button>
     {/*SEARCH BAR (grows to fill available space)*/}
-    <div className='flex-1 relative'>
+    <div style={{ flex: 1, position: 'relative' }}>
         {/*Search icon inside the input field (left side) */}
-        <Search size={16} className='absolute left-3 top-1/2 -translate-y-1/2 text-gray-400'
-        />
+        <Search size={16} color='#9CA3AF' style={{ position: 'absolute', left: '12px', top: '50%', transform: 'translateY(-50%)' }} />
         <input type='text' value={searchQuery}
         onChange={(e) => setSearchQuery(e.target.value)}
         onKeyDown={handleSearch}
         placeholder='Apple Watch, Samsung S21, Macbook Pro,...'
-        className='w-full pl-9 pr-4 py-2 rounded-xl border border-gray-200 bg-white text-sm focus:outline-none focus:ring-2 focus:ring-primary text-gray-600 placeholder-gray-400'
+        style={{ width: '100%', paddingLeft: '36px', paddingRight: '16px', paddingTop: '8px', paddingBottom: '8px', borderRadius: '12px', border: '1px solid #E5E7EB', backgroundColor: 'white', fontSize: '14px', outline: 'none', boxSizing: 'border-box', color: '#374151' }}
         />
         </div>
 
         {/*CART ICON with badge */}
-        <Link to='/cart' className='relative p-2 rounded-lg hover:bg-gray-200 transition-colors'
+        <Link to='/cart' 
+        style={{ position: 'relative', padding: '8px', borderRadius: '8px', display: 'flex' }}
         aria-label='View cart'
         >
-            <ShoppingCart size={24} className='text-gray-700' />
+            <ShoppingCart size={24} color='#374151' />
             {/*Badge:only shown when cart has items */}
             {cartQuantity > 0 && (
-                <span classname='absolute -top-1 -right-1 bg-primary text-white text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center'>
-                    {cartQuantity}
+                <span style={{ position: 'absolute', top: '-4px', right: '-4px', backgroundColor: '#2563EB', color: 'white', fontSize: '11px', fontWeight: 'bold', width: '18px', height: '18px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    {cartQty}
                     </span>
             )}
             </Link>
