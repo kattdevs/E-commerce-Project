@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
 import { Star } from "lucide-react";
 import { increaseQty, decreaseQty, removeItem } from '../store/cartSlice';
-import { defaults } from "autoprefixer";
+
 
 //item - a cart item (product fileds + quantity)
 //showControls - if true, shows =/- buttons (CartPage)
@@ -73,7 +73,7 @@ function CartItem({ item, showControls = true }) {
                 onClick={() => dispatch(removeItem(item.id))}
                 style={{ marginLeft: '8px', background: 'none', border: 'none', cursor: 'pointer', color: '#EF4444' }}
               >
-                <Trash2 size={16} />
+                ✕
               </button>
             </div>
           )}
