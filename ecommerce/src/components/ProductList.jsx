@@ -2,7 +2,7 @@ import ProductCard from './ProductCard';
 
 //products (array from products.js)
 //searchQuery - string typed in the Navbar search bar
-function ProductionList ({ products, searchQuery =''}) {
+function ProductList ({ products, searchQuery =''}) {
     //Filter products:match name OR variant
     const filtered = searchQuery.trim()
     ? products.filter(p =>
