@@ -20,7 +20,7 @@ if (filtered.length === 0) {
     );
 }
 
-returnn (
+return (
     //Responsive grid:
     //1 column on mobile (grid-cols-1)
     //2 columns on medium screens (sm:grid-cols-2)
