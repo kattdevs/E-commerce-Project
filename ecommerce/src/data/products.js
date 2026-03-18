@@ -76,7 +76,7 @@ const products = [
         name: 'iPhone 14',
         variant: 'Product RED',
         price: 619.99,
-        image: '/images/iphone14-red.png',
+        image: '/images/iphone 14-red.png',
         description: 'The Apple iPhone 14 is a smartphone released by Apple in 2022. It features a 6.1-inch Super Retina XDR display that delivers bright, sharp visuals for videos, apps, and games. Powered by the A15 Bionic chip, the device offers fast performance and efficient battery life for everyday tasks. The iPhone 14 includes an advanced dual-camera system with 12-megapixel wide and ultra-wide lenses, allowing users to capture high-quality photos and 4K videos, even in low light. It also offers features such as Face ID for secure unlocking, water and dust resistance, and safety tools like Crash Detection and Emergency SOS via satellite, making it a powerful and reliable smartphone for daily communication and entertainment.',
         rating: 4.5,
         category: 'Phones',
