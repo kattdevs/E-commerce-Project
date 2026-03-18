@@ -58,7 +58,7 @@ return (
         >
             <ShoppingCart size={24} color='#374151' />
             {/*Badge:only shown when cart has items */}
-            {cartQuantity > 0 && (
+            {cartQty > 0 && (
                 <span style={{ position: 'absolute', top: '-4px', right: '-4px', backgroundColor: '#2563EB', color: 'white', fontSize: '11px', fontWeight: 'bold', width: '18px', height: '18px', borderRadius: '50%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
                     {cartQty}
                     </span>
