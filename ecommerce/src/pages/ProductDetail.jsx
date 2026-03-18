@@ -1,8 +1,8 @@
-import {useLocation, useParams, useNavigate, Link} from 'react=router-dom'
-import { useDispatch } from 'react-redux';
-import {Star, ArrowLeft, ShoppingBag} from 'lucide-react';
-import {addItem} from '../store/ccartSlice';
-import products from '../data/products';
+import {useLocation, useParams, useNavigate, Link} from "react-router-dom";
+import { useDispatch } from "react-redux";
+import {Star, ArrowLeft, ShoppingBag} from "lucide-react";
+import {addItem} from "../store/cartSlice";
+import products from "../data/products";
 
 function ProductDetail() {
     const {id} = useParams(); //get:id from the URL 
