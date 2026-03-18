@@ -13,7 +13,7 @@ function Navbar ({ onMenuClick, sidebarOpen}) {
     const [searchQuery, setSearchQuery] = useState ('');
 
 //Get total cart quantity fromRedux for the badge 
-const cartQuantity = useSelector (selectCartTotalQty);
+const cartQty = useSelector (selectCartTotalQty);
 
 //Handle search: when the user presses Enter, go to Home 
 //with a query param so Home cabn filter products 
