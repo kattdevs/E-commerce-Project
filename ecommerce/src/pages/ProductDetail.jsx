@@ -18,23 +18,26 @@ function ProductDetail() {
     //Gaurd: if product not found at all, show an error
     if(!product){
         return(
-            <div className='min-h-screen flex items-center justify-center bg-app-bg'>
-                <div className='text-center'>
-                    <p className='text-lg font-semibold text-gray-700'>Product not found.</p>
-                    <Link to='/' className='text=primary text-sm mt-2 inline-block'>
+            <div style={{minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: '#EDEDED' }}>
+                <div style={{ textAlign: 'center' }}>
+                    <p style={{fontSize: '18px', fontweight: '600', color: '#374151' }}>Product not found</p>
+                    <Link to='/' style={{color: '#2563EB', fontSize: '14px',marginTop: '8px', display: 'inline-block' }}>
                     Back to Home
                     </Link>
-                    </div>/
                 </div>
+            </div>
         );
     }
 
     const renderStars = (rating) =>
         Array.from({length:5}, (_,i) => (
-            <Star key={i} size={18}
-            className={i < Math.floor(rating) ? 'fill-star text-star' : 'text-gray-300' }
+            <Star 
+            key={i}
+            size={18}
+            className={i < Math.floor(rating) ? 'text-yellow-400' :'text-gray-300'}
+            fill={i < Math.floor(rating) ? '#F59E0B' : 'none'}
             />
-        ));
+         ));
 
     const handleAddToCart = () => {
         dispatch(addItem(product));
@@ -42,13 +45,13 @@ function ProductDetail() {
     };
 
     return (
-        <div className='min-h-screen bg-app-bg'>
+        <div style={{minHeight: '100vh', backgroundColor: '#EDEDED' }}>
 
             {/*BACK BUTTON*/}
-            <div className='p-4 lg:p-6'>
+            <div style={{padding: '16px 24px'}}>
                 <button 
                 onClick={() => navigate (-1)}
-                className='flex items-center gap-2 text-gray-600 hover:text-gray-900 text-sm font-medium'
+                style={{display: 'flex', alignItems:'center', gap: '8px', color: '#6B7280', fontsize: '14px', fontWeight: '500', background: 'none', border: 'none', cursor: 'pointer'}}
                 >
                     <ArrowLeft size={18} />
                     Back
@@ -56,41 +59,50 @@ function ProductDetail() {
             </div>
     
     {/*PRODUCT CONTENT*/}
-    <div className='max-w-3xl mx-auto px-4 pb-12 flex flex-col md:flex-row gap-8'>
+    <div style={{maxWidth: '1200px', margin: '0 auto', padding: '0 16px 48px', display: 'flex', flexWrap: 'wrap', gap: '32px'}}>
     
     {/*PRODUCT IMAGE*/}
-    <div className='bg-white rounded-card shadow-sm p-8 flex-1 flex items-center justify-center min-h-64'>
+    <div style={{flex: '1', minWidth: '280px', backgroundColor: 'white', borderRadius: '16px', padding: '32px', display: 'flex', alignItems: 'center', justifyContent: 'center', minHeight: '256px', boxShadow: '0 1px 3px rgba(0,0,0,0.1)'}}> 
         <img
         src={product.image}
         alt={product.name}
-        className='max-h-64 max-w-full object-contain'
+                style={{maxHeight: '256px', maxWidth: '100%', objectFit: 'contain'}}
+                onError={(e) => {e.target.src ='https://placehold.co/300x300?text=No+Image';}}
         />
         </div>
 
         {/*PRODUCT INFORMATION*/}
-        <div className='flex-1 flex flex-col gap-4'>
+        <div style={{flex: '1', minWidth: '280px', display: 'flex', flexDirection: 'column', gap: '16px'}}>
             <div>
-                <p className='text-subtle text-sm'>{product.variant}</p>
-                <h1 className='text-2xl font-bold text-gray-900 mt-1'>{product.name}</h1>
+                <p style={{flex: '1', minWidth: '280px', display:'flex', flexDirection:'column', gap: '16px', fontSize: '14px', color: '#6B7280'}}>{product.variant}</p>
+                <h1 style={{fontSize: '24px', fontWeight: '700', color: '#111827', marginTop:'4px'}}>{product.name}</h1>
                 </div>
 
                 {/*Stars*/}
-                <div className='flex items-center gap-1'>
+                <div style={{display: 'flex', alignItems: 'center', gap: '4px'}}>
                     {renderStars(product.rating)}
-                    <span className='text-sm text-subtle ml-2'>{product.rating}/5</span>
+                    <span style={{fontSize: '14px', color: '#6B7280', marginLeft: '8px'}}>{product.rating} / 5</span>
                     </div>
 
-                    <p className='text-gray-600 text-sm leading-relaxed'>{product.description}</p>
-                    <p className='text-3xl font-bold text-gray-900'>${product.price.toFixed(2)}</p>
+                    <p style={{color:'#4B5563', fontSize:'14px', lineHeight: '1.6'}}>{product.description}</p>
+                    <p style={{fontSize: '30px', fontWeight: '700', color: '#111827'}}>${product.price.toFixed(2)}</p>
 
                     {/*Add to Cart button*/}
                     <button 
                     onClick={handleAddToCart}
-                    className='btn-cta'
+                    style={{backgroundColor: '#111827', color:'white', width:'100%', padding: '12px', borderRadius:'12px', fontWeight: '600', fontSize: '15px', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px', border: 'none', cursor: 'pointer'}}
                     >
                         <ShoppingBag size={18} />
                         Add to Bag
                     </button>
+
+                    {/*Back to Home*/}
+                    <Link
+                    to='/'
+                    style={{textAlign:'center', color: '#2563EB', fontSize: '14px', marginTop: '4px'}}
+                    >
+                       ←Continue Shopping 
+                    </Link>
                 </div>
             </div>
         </div>
